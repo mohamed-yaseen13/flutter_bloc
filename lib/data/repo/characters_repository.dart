@@ -7,9 +7,9 @@ class CharactersRepository {
   CharactersRepository(this.apiService);
 
   Future<List<CharacterModel>> getAllCharacters() async {
-    final character = await apiService.getAllCharacters();
+    final characters = await apiService.getAllCharacters();
 
-    return character
+    return characters
         .map((character) => CharacterModel.fromJson(character))
         .toList();
   }

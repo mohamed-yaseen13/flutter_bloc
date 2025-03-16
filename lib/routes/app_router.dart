@@ -8,9 +8,13 @@ import 'package:my_flutter_bloc/presentation/screens/characters_screen.dart';
 import 'package:my_flutter_bloc/routes/app_routes.dart';
 
 class AppRouter {
-  static late CharactersRepository charactersRepository;
+  static CharactersRepository charactersRepository = CharactersRepository(
+    ApiService(),
+  );
 
-  static late CharactersCubit charactersCubit;
+  static CharactersCubit charactersCubit = CharactersCubit(
+    charactersRepository,
+  );
 
   AppRouter() {
     charactersRepository = CharactersRepository(ApiService());

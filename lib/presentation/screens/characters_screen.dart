@@ -13,14 +13,13 @@ class CharactersScreen extends StatefulWidget {
 }
 
 class _CharactersScreenState extends State<CharactersScreen> {
-  late List<CharacterModel> allCharacters;
+  List<CharacterModel> allCharacters = [];
 
   @override
   void initState() {
     super.initState();
 
-    allCharacters =
-        BlocProvider.of<CharactersCubit>(context).getAllCharacters();
+    BlocProvider.of<CharactersCubit>(context).getAllCharacters();
   }
 
   @override
@@ -60,10 +59,14 @@ class _CharactersScreenState extends State<CharactersScreen> {
                 crossAxisCount: 2,
                 childAspectRatio: 2 / 3,
                 crossAxisSpacing: 1,
-                mainAxisExtent: 1,
+                mainAxisSpacing: 1,
               ),
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              padding: EdgeInsets.zero,
+              itemCount: allCharacters.length,
               itemBuilder: (context, index) {
-                return CharacterGridItem();
+                return CharacterGridItem(character: allCharacters[index]);
               },
             ),
           ],

@@ -19,7 +19,7 @@ class ApiService {
     try {
       Response response = await dio.get('character');
       print(response.data);
-      return response.data;
+      return response.data['results'];
     } catch (e) {
       print(e);
       return [];
