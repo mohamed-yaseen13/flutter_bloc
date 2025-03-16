@@ -6,7 +6,7 @@ class CharactersRepository {
 
   CharactersRepository(this.apiService);
 
-  Future<List<dynamic>> getAllCharacters() async {
+  Future<List<CharacterModel>> getAllCharacters() async {
     final character = await apiService.getAllCharacters();
 
     return character
