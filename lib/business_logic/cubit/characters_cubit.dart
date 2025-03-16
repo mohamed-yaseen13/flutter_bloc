@@ -13,7 +13,7 @@ class CharactersCubit extends Cubit<CharactersState> {
 
   CharactersCubit(this.charactersRepository) : super(CharactersInitial());
 
-  List<CharacterModel> getAllCharaacters() {
+  List<CharacterModel> getAllCharacters() {
     characters =
         charactersRepository.getAllCharacters().then((Characters) {
               emit(CharactersLoaded(characters: Characters));
