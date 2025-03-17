@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_bloc/constants/app_colors.dart';
 import 'package:my_flutter_bloc/data/models/character_model.dart';
+import 'package:my_flutter_bloc/presentation/widgets/character_text.dart';
+import 'package:my_flutter_bloc/routes/app_routes.dart';
 
 class CharacterGridItem extends StatelessWidget {
   final CharacterModel character;
@@ -16,37 +18,31 @@ class CharacterGridItem extends StatelessWidget {
         color: AppColors.appWhite,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: GridTile(
-        child: Container(
-          color: AppColors.appGrey,
-          child:
-              character.image.isNotEmpty
-                  ? FadeInImage.assetNetwork(
-                    width: double.infinity,
-                    height: double.infinity,
-                    placeholder: 'assets/images/loading.gif',
-                    image: character.image,
-                    fit: BoxFit.cover,
-                  )
-                  : Image.asset('assets/images/placeholder.jpg'),
-        ),
-        footer: Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          color: Colors.black54,
-          alignment: Alignment.bottomCenter,
-          child: Text(
-            character.name,
-            style: TextStyle(
-              height: 1.3,
-              fontSize: 16,
-              color: AppColors.appWhite,
-              fontWeight: FontWeight.bold,
+      child: InkWell(
+        onTap:
+            () => Navigator.pushNamed(
+              context,
+              AppRoutes.details,
+              arguments: character,
             ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            textAlign: TextAlign.center,
+        child: GridTile(
+          child: Hero(
+            tag: character.id,
+            child: Container(
+              color: AppColors.appGrey,
+              child:
+                  character.image.isNotEmpty
+                      ? FadeInImage.assetNetwork(
+                        width: double.infinity,
+                        height: double.infinity,
+                        placeholder: 'assets/images/loading.gif',
+                        image: character.image,
+                        fit: BoxFit.cover,
+                      )
+                      : Image.asset('assets/images/placeholder.jpg'),
+            ),
           ),
+          footer: CharacterText(character: character),
         ),
       ),
     );
